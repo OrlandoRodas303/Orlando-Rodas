@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orlando Rodas</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fondo-transparente {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.8);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 250px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5);
+            margin: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .whatsapp { background-color: #25D366; }
+        .facebook { background-color: #1877F2; }
+        .gmail { background-color: #D14836; }
+        .outlook { background-color: #0072C6; }
+        .tiktok { background: linear-gradient(45deg, #EE1D52, #69C9D0); }
+        .instagram { background: linear-gradient(45deg, #C13584, #E1306C, #F77737); }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
+        }
+
+        .developer {
+            margin-top: 40px;
+            font-size: 14px;
+            opacity: 0.8;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Estilo optimizado para la estela de colores */
+        .trail {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, red, yellow, green, cyan, blue, magenta);
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body onmousemove="throttleTrail(event)" ontouchmove="handleTouch(event)">
+    
+    <h1 class="fondo-transparente">Orlando Rodas</h1>
+    
+    <div class="container">
+        <a href="https://wa.me/50237246407" class="btn whatsapp">WhatsApp Principal</a>
+        <a href="https://wa.me/50253506225" class="btn whatsapp">WhatsApp Secundario</a>
+        <a href="https://www.facebook.com/share/1VS8zxSMr4/" class="btn facebook">Facebook</a>
+        <a href="mailto:orlandorodas303@gmail.com" class="btn gmail">Gmail</a>
+        <a href="mailto:orlandorodas09@outlook.com" class="btn outlook">Outlook</a>
+        <a href="https://www.tiktok.com/@the_user.303" class="btn tiktok">TikTok</a>
+        <a href="https://www.instagram.com/orlandorodas123?igsh=YzljYTk1ODg3Zg==En" class="btn instagram">Instagram</a>
+    </div>
+
+    <p class="developer">Desarrollado por PiCreations</p>
+
+    <script>
+        let lastTrailTime = 0;
+        function throttleTrail(event) {
+            const now = Date.now();
+            if (now - lastTrailTime > 10) { // Limita la frecuencia de generación
+                lastTrailTime = now;
+                createTrail(event.pageX, event.pageY);
+            }
+        }
+
+        function createTrail(x, y) {
+            let trail = document.createElement("div");
+            trail.classList.add("trail");
+            document.body.appendChild(trail);
+            
+            trail.style.left = `${x}px`;
+            trail.style.top = `${y}px`;
+            
+            setTimeout(() => {
+                trail.style.opacity = "0";
+                trail.style.transform = "scale(2)";
+                setTimeout(() => trail.remove(), 300);
+            }, 50);
+        }
+
+        function handleTouch(event) {
+            event.preventDefault();
+            let touch = event.touches[0];
+            createTrail(touch.pageX, touch.pageY);
+        }
+    </script>
+</body>
+</html>
